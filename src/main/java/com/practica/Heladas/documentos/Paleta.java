@@ -14,10 +14,8 @@ public class Paleta {
     private String id;
     private String nombre;
     private String descripcion;
-    private Date caducidad;
     private int cantidad;
     private int precio;
-    private boolean disponibilidad;
 
     /**
      * Constructor parametrizado
@@ -30,14 +28,12 @@ public class Paleta {
      * @param precio         de la paleta
      * @param disponibilidad de la paleta
      */
-    public Paleta(String id, String nombre, String descripcion, Date caducidad, int cantidad, int precio, boolean disponibilidad) {
+    public Paleta(String id, String nombre, String descripcion,int cantidad, int precio) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.caducidad = caducidad;
         this.cantidad = cantidad;
         this.precio = precio;
-        this.disponibilidad = disponibilidad;
     }
 
     //Métodos de acceso
@@ -65,13 +61,6 @@ public class Paleta {
         this.descripcion = descripcion;
     }
 
-    public Date getCaducidad() {
-        return caducidad;
-    }
-
-    public void setCaducidad(Date caducidad) {
-        this.caducidad = caducidad;
-    }
 
     public int getCantidad() {
         return cantidad;
@@ -87,13 +76,5 @@ public class Paleta {
 
     public void setPrecio(int precio) {
         this.precio = precio;
-    }
-
-    public boolean isDisponibilidad() {
-        return disponibilidad;
-    }
-
-    public void setDisponibilidad(boolean disponibilidad) {
-        this.disponibilidad = disponibilidad;
     }
 }

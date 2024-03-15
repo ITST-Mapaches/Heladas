@@ -13,7 +13,7 @@ import java.util.UUID;
 import com.practica.Heladas.documentos.Paleta;
 
 //permitimos que los endpoints puedan ser consumidos o llamados desde cualquier lugar
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:5173")
 
 //marcamos la clase como controlador rest (maneja solicitudes HTTP y retorna una respuesta en JSON o XML)
 @RestController
@@ -60,6 +60,20 @@ public class PaletaController {
     }
 
     /**
+     * !endpoint que busca un documento por su id
+     *
+     * @param id de documento a buscar
+     * @return respuesta de tipo HTTP
+     * @PathVariable indica que se debe recuperar la variable de ruta llamada id
+     */
+    @GetMapping("buscar/{id}")
+    public ResponseEntity<Paleta> buscarPaleta(@PathVariable String id) {
+        Paleta paleta = paletaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No existe la paleta" + id));
+
+        return ResponseEntity.status(HttpStatus.OK).body(paleta);
+    }
+
+    /**
      * !endpoint que actualiza un documento en la base de datos
      *
      * @param id     de documento a actualizar
@@ -77,10 +91,8 @@ public class PaletaController {
         //manipula mediante los metodos de acceso los valores en base al objeto recibido
         paleta1.setNombre(paleta.getNombre());
         paleta1.setDescripcion(paleta.getDescripcion());
-        paleta1.setCaducidad(paleta.getCaducidad());
         paleta1.setCantidad(paleta.getCantidad());
         paleta1.setPrecio(paleta.getPrecio());
-        paleta1.setDisponibilidad(paleta.isDisponibilidad());
 
         //actualiza la paleta
         Paleta paletaActualizada = paletaRepository.save(paleta1);
